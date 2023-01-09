@@ -3,6 +3,14 @@
 
 {% do view.registerAssetBundle("roberskine\\usermanual\\assetbundles\\usermanual\\UserManualAsset") %}
 
+{% macro level(page) %}
+  {% if page.level is defined and page.level > 1 %}
+    {% for i in 2..page.level %}
+      &ndash;  
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
+
 {% set sectionSelected = (craft.userManual.settings.section is defined)
   ? craft.userManual.settings.section
   : "Homepage" %}
@@ -19,7 +27,7 @@
           <li id="{{ page.id }}">
             <a {% if active %}class="sel"{% endif %}
               href="{{ url('usermanual/' ~ page.id) }}">
-              {{page.title}}
+              {{_self.level(page)}}{{page.title}}
             </a>
             {% ifchildren %}
                 <ul>
