@@ -160,8 +160,8 @@ class UserManual extends Plugin
             'label' => '',
             'value' => '',
         ]];
-        foreach (Craft::$app->sections->getAllSections() as $section) {
-            $siteSettings = Craft::$app->sections->getSectionSiteSettings($section['id']);
+        foreach (Craft::$app->entries->getAllSections() as $section) {
+            $siteSettings = Craft::$app->entries->getSectionSiteSettings($section['id']);
             $hasUrls = false;
             foreach ($siteSettings as $siteSetting) {
                 if ($siteSetting->hasUrls) {
@@ -212,7 +212,7 @@ class UserManual extends Plugin
 
         // Allow handles from config
         if (!is_numeric($settings->section)) {
-            $section = Craft::$app->getSections()->getSectionByHandle('homepage');
+            $section = Craft::$app->entries->getSectionByHandle('homepage');
             if ($section) {
                 $settings->section = $section->id;
             }

@@ -91,6 +91,7 @@ class UserManualTwigExtension extends AbstractExtension
         // redirect to the settings page
         if (!$sectionId || !$entry) {
             Craft::$app->controller->redirect(UrlHelper::cpUrl('settings/plugins/usermanual/'))->send();
+            return '';
         } else {
             if ($settings->templateOverride) {
                 // Setting the mode also sets the templatepath to the default for that mode
