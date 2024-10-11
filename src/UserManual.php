@@ -212,9 +212,13 @@ class UserManual extends Plugin
 
         // Allow handles from config
         if (!is_numeric($settings->section)) {
-            $section = Craft::$app->entries->getSectionByHandle('homepage');
-            if ($section) {
-                $settings->section = $section->id;
+            try {
+                $section = Craft::$app->entries->getSectionByHandle('homepage');
+                if ($section) {
+                    $settings->section = $section->id;
+                }
+            } catch (\Exception $e) {
+                // Do nothing
             }
         }
 
